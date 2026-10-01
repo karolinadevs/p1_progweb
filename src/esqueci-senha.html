@@ -5,10 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Recuperar senha</title>
+  <title>Recuperar senha | Capítulo Livraria</title>
 
-<link rel="icon" type="image/png" href="/favicon.png">
-
+  <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="stylesheet" href="/loja.css">
 </head>
 
@@ -19,40 +18,59 @@
     <div class="header-top">
 
       <a href="/" class="logo">
-
-        <span class="logo-mark">
-          C
-        </span>
+        <span class="logo-mark">C</span>
 
         <div>
           <strong>CAPÍTULO</strong>
           <small>Livraria</small>
         </div>
-
       </a>
 
-      <div class="search-box">
 
-        <input type="text" placeholder="Busque por título, autor ou gênero...">
+      <form
+        class="search-box"
+        action="/busca.html"
+      >
+        <input
+          type="text"
+          name="q"
+          placeholder="Busque por título, autor ou gênero..."
+        >
 
-        <button>
+        <button type="submit">
           🔍
         </button>
+      </form>
 
-      </div>
 
-      <a href="/login.html" class="user-icon">
+      <a
+        href="/login.html"
+        class="user-icon"
+        title="Minha conta"
+      >
         👤
       </a>
 
     </div>
 
+
     <nav class="menu">
 
-      <a href="/">Início</a>
-      <a href="/">Produtos</a>
-      <a href="/cesta.html">Cesta</a>
-      <a href="/login.html">Minha conta</a>
+      <a href="/">
+        Início
+      </a>
+
+      <a href="/#livros">
+        Livros
+      </a>
+
+      <a href="/cesta.html">
+        Cesta
+      </a>
+
+      <a href="/login.html">
+        Minha conta
+      </a>
 
     </nav>
 
@@ -63,14 +81,17 @@
 
     <section class="recover-card">
 
-      <h1>Esqueci minha senha</h1>
+      <h1>
+        Esqueci minha senha
+      </h1>
 
       <p>
         Informe o e-mail utilizado no cadastro para
-        recuperar o acesso à sua conta.
+        receber as instruções de recuperação da sua senha.
       </p>
 
-      <form>
+
+      <form id="recuperar-form">
 
         <div class="form-group">
 
@@ -78,23 +99,106 @@
             E-mail
           </label>
 
-          <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Digite seu e-mail"
+            required
+          >
 
         </div>
 
-        <button type="submit" class="button">
+
+        <button
+          type="submit"
+          class="button"
+        >
           Enviar
         </button>
 
       </form>
 
-      <a href="/login.html" class="back-link">
+
+      <div
+        id="mensagem-recuperacao"
+        style="
+          display: none;
+          margin-top: 25px;
+          padding: 18px;
+          background: #f1e5d4;
+          border-radius: 10px;
+          line-height: 1.6;
+        "
+      >
+      </div>
+
+
+      <a
+        href="/login.html"
+        class="back-link"
+      >
         Voltar para o login
       </a>
 
     </section>
 
   </main>
+
+
+  <script>
+
+    const form =
+      document.getElementById(
+        "recuperar-form"
+      );
+
+
+    const mensagem =
+      document.getElementById(
+        "mensagem-recuperacao"
+      );
+
+
+    form.addEventListener(
+      "submit",
+      function(event) {
+
+        event.preventDefault();
+
+
+        const email =
+          document
+            .getElementById("email")
+            .value
+            .trim();
+
+
+        mensagem.style.display =
+          "block";
+
+
+        mensagem.innerHTML = `
+          <strong>
+            Solicitação recebida!
+          </strong>
+
+          <br><br>
+
+          Se existir uma conta cadastrada com o e-mail
+          <strong>${email}</strong>,
+          uma mensagem de recuperação será enviada
+          para esse endereço com as instruções
+          para redefinir sua senha.
+        `;
+
+
+        form.reset();
+
+      }
+    );
+
+  </script>
 
 </body>
 
