@@ -66,6 +66,7 @@ button {
 
 .header-top {
   max-width: 1200px;
+
   margin: auto;
   padding: 20px;
 
@@ -124,8 +125,8 @@ button {
   color: var(--muted);
 
   font-size: 10px;
-
   letter-spacing: 2px;
+
   text-transform: uppercase;
 }
 
@@ -136,6 +137,7 @@ button {
 
 .search-box {
   flex: 1;
+
   max-width: 600px;
 
   display: flex;
@@ -182,7 +184,7 @@ button {
 
 
 /* =========================
-   ÍCONE USUÁRIO
+   USUÁRIO
 ========================= */
 
 .user-icon {
@@ -210,8 +212,8 @@ button {
 
 .menu {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
   gap: 40px;
 
@@ -302,6 +304,7 @@ button {
   min-height: 430px;
 
   display: grid;
+
   grid-template-columns: 1.2fr 1fr;
 
   align-items: center;
@@ -368,13 +371,14 @@ button {
 
 
 /* =========================
-   LIVROS DECORATIVOS HERO
+   LIVROS DECORATIVOS
 ========================= */
 
 .hero-books {
   min-height: 300px;
 
   display: flex;
+
   align-items: flex-end;
   justify-content: center;
 }
@@ -417,11 +421,12 @@ button {
 
 
 /* =========================
-   CABEÇALHO DE SEÇÃO
+   TÍTULO DE SEÇÃO
 ========================= */
 
 .section-heading {
   display: flex;
+
   align-items: flex-end;
   justify-content: space-between;
 
@@ -448,12 +453,18 @@ button {
 
 
 /* =========================
-   GRID DE PRODUTOS
+   GRID DE LIVROS
+   DESKTOP = 3
 ========================= */
 
 .products-grid {
+  width: 100%;
+
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
   gap: 24px;
 }
 
@@ -463,6 +474,10 @@ button {
 ========================= */
 
 .product-card {
+  width: 100%;
+
+  min-width: 0;
+
   overflow: hidden;
 
   background: var(--paper);
@@ -510,20 +525,6 @@ button {
   padding: 22px 24px 24px;
 }
 
-.book-category {
-  display: block;
-
-  margin-bottom: 8px;
-
-  color: var(--wine);
-
-  font-size: 11px;
-  font-weight: bold;
-
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
 .product-content h2,
 .product-card h2 {
   margin: 0 0 5px;
@@ -552,6 +553,7 @@ button {
 
 .product-footer {
   display: flex;
+
   align-items: center;
   justify-content: space-between;
 
@@ -568,7 +570,7 @@ button {
 
 
 /* =========================
-   PÁGINA DE BUSCA
+   BUSCA
 ========================= */
 
 .search-title {
@@ -591,9 +593,31 @@ button {
   color: var(--muted);
 }
 
+.empty-search {
+  grid-column: 1 / -1;
+
+  padding: 60px 20px;
+
+  text-align: center;
+}
+
+.empty-search h2 {
+  margin-bottom: 10px;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-weight: normal;
+}
+
+.empty-search p {
+  margin-bottom: 24px;
+
+  color: var(--muted);
+}
+
 
 /* =========================
-   DETALHE DO PRODUTO
+   DETALHE
 ========================= */
 
 .product-detail {
@@ -615,6 +639,7 @@ button {
 
 .product-detail .product-image {
   display: flex;
+
   justify-content: center;
 }
 
@@ -695,7 +720,8 @@ button {
 .cart-item {
   display: grid;
 
-  grid-template-columns: 2fr 120px 150px;
+  grid-template-columns:
+    2fr 120px 150px;
 
   align-items: center;
 
@@ -721,6 +747,7 @@ button {
 
 .cart-item .product-info {
   display: flex;
+
   align-items: center;
 
   gap: 20px;
@@ -771,6 +798,7 @@ button {
 
 .cart-footer {
   display: flex;
+
   align-items: center;
   justify-content: space-between;
 
@@ -792,6 +820,98 @@ button {
   display: flex;
 
   gap: 12px;
+}
+
+.empty-cart {
+  padding: 50px 20px;
+
+  text-align: center;
+
+  color: var(--muted);
+}
+
+.empty-cart p {
+  margin-bottom: 20px;
+
+  font-size: 18px;
+}
+
+.remove-item {
+  margin-top: 8px;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: var(--wine);
+
+  font-size: 13px;
+
+  text-decoration: underline;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   AGRADECIMENTO
+========================= */
+
+.thank-you {
+  max-width: 650px;
+
+  margin: 50px auto;
+
+  padding: 60px 40px;
+
+  background: var(--paper);
+
+  border: 1px solid var(--border);
+  border-radius: 20px;
+
+  text-align: center;
+}
+
+.thank-you-icon {
+  width: 70px;
+  height: 70px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto 25px;
+
+  border-radius: 50%;
+
+  background: var(--wine);
+
+  color: white;
+
+  font-size: 32px;
+}
+
+.thank-you h1 {
+  margin-bottom: 15px;
+
+  font-family: Georgia, serif;
+
+  font-size: 38px;
+
+  font-weight: normal;
+}
+
+.thank-you p {
+  max-width: 480px;
+
+  margin: 0 auto 30px;
+
+  color: var(--muted);
+
+  line-height: 1.7;
 }
 
 
@@ -822,6 +942,7 @@ button {
 
 .register-area {
   display: flex;
+
   flex-direction: column;
 
   justify-content: center;
@@ -899,6 +1020,7 @@ button {
 
 .form-group {
   display: flex;
+
   flex-direction: column;
 
   margin-bottom: 20px;
@@ -951,13 +1073,14 @@ button {
 
 
 /* =========================
-   RECUPERAÇÃO DE SENHA
+   RECUPERAR SENHA
 ========================= */
 
 .recover-container {
   min-height: calc(100vh - 145px);
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
@@ -1017,12 +1140,14 @@ button {
 
 /* =========================
    TABLET
+   2 LIVROS POR LINHA
 ========================= */
 
-@media (max-width: 1050px) {
+@media (max-width: 900px) {
 
   .products-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
   }
 
   .hero {
@@ -1038,6 +1163,7 @@ button {
 
 /* =========================
    MOBILE
+   1 LIVRO POR LINHA
 ========================= */
 
 @media (max-width: 700px) {
@@ -1100,6 +1226,7 @@ button {
 
   .section-heading {
     align-items: flex-start;
+
     flex-direction: column;
   }
 
@@ -1141,6 +1268,7 @@ button {
 
   .cart-footer {
     flex-direction: column;
+
     align-items: stretch;
   }
 
@@ -1189,98 +1317,24 @@ button {
     padding: 24px;
   }
 
-  /* =========================
-   CESTA - FUNCIONALIDADES
+  .thank-you {
+    padding: 40px 24px;
+  }
+
+}
+
+
+/* =========================
+   GARANTIA FINAL DO GRID
 ========================= */
 
-.empty-cart {
-  padding: 50px 20px;
+@media (min-width: 901px) {
 
-  text-align: center;
+  .products-grid {
+    display: grid !important;
 
-  color: var(--muted);
-}
-
-.empty-cart p {
-  margin-bottom: 20px;
-
-  font-size: 18px;
-}
-
-
-.remove-item {
-  margin-top: 8px;
-
-  padding: 0;
-
-  border: none;
-
-  background: transparent;
-
-  color: var(--wine);
-
-  font-size: 13px;
-
-  text-decoration: underline;
-
-  cursor: pointer;
-}
-
-.thank-you {
-  max-width: 650px;
-
-  margin: 50px auto;
-
-  padding: 60px 40px;
-
-  background: var(--paper);
-
-  border: 1px solid var(--border);
-  border-radius: 20px;
-
-  text-align: center;
-}
-
-.thank-you-icon {
-  width: 70px;
-  height: 70px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  margin: 0 auto 25px;
-
-  border-radius: 50%;
-
-  background: var(--wine);
-
-  color: white;
-
-  font-size: 32px;
-}
-
-.thank-you h1 {
-  margin-bottom: 15px;
-
-  font-family: Georgia, serif;
-
-  font-size: 38px;
-
-  font-weight: normal;
-}
-
-.thank-you p {
-  max-width: 480px;
-
-  margin:
-    0 auto
-    30px;
-
-  color: var(--muted);
-
-  line-height: 1.7;
-}
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr)) !important;
+  }
 
 }

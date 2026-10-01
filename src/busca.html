@@ -2,246 +2,287 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Busca | Capítulo Livraria</title>
+    <title>Busca | Capítulo Livraria</title>
 
-  <link rel="stylesheet" href="/loja.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" href="/loja.css">
 </head>
 
 <body>
 
-  <header class="header">
+    <header class="header">
 
-    <div class="header-top">
+        <div class="header-top">
 
-      <a href="/" class="logo">
-        <span class="logo-mark">C</span>
+            <a href="/" class="logo">
+                <span class="logo-mark">C</span>
 
-        <div>
-          <strong>CAPÍTULO</strong>
-          <small>Livraria</small>
+                <div>
+                    <strong>CAPÍTULO</strong>
+                    <small>Livraria</small>
+                </div>
+            </a>
+
+
+            <form class="search-box" action="/busca.html">
+                <input type="text" name="q" id="campo-busca" placeholder="Busque por título, autor ou gênero...">
+
+                <button type="submit">
+                    🔍
+                </button>
+            </form>
+
+
+            <a href="/login.html" class="user-icon" title="Minha conta">
+                👤
+            </a>
+
         </div>
-      </a>
 
 
-      <form
-        class="search-box"
-        action="/busca.html"
-      >
-        <input
-          type="text"
-          name="q"
-          id="campo-busca"
-          placeholder="Busque por título, autor ou gênero..."
-        >
+        <nav class="menu">
 
-        <button type="submit">
-          🔍
-        </button>
-      </form>
+            <a href="/">
+                Início
+            </a>
 
+            <a href="/#livros">
+                Livros
+            </a>
+
+            <a href="/cesta.html">
+                Cesta
+            </a>
+
+            <a href="/login.html">
+                Minha conta
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <main class="container">
+
+        <div class="search-title">
+
+            <h1>
+                Resultado da busca
+            </h1>
+
+            <p id="texto-busca">
+                Livros encontrados
+            </p>
+
+        </div>
+
+
+        <section class="products-grid" id="resultado-busca">
+        </section>
+
+    </main>
+
+
+    <script>
+
+        const livros = [
+
+            {
+                id: "trono-de-vidro",
+                titulo: "Trono de Vidro",
+                autor: "Sarah J. Maas",
+                genero: "Fantasia",
+                preco: 59.90,
+                imagem: "/imagens/trono-de-vidro.jpg"
+            },
+
+            {
+                id: "tudo-e-rio",
+                titulo: "Tudo é Rio",
+                autor: "Carla Madeira",
+                genero: "Romance",
+                preco: 44.90,
+                imagem: "/imagens/tudo-e-rio.jpg"
+            },
+
+            {
+                id: "a-hipotese-do-amor",
+                titulo: "A Hipótese do Amor",
+                autor: "Ali Hazelwood",
+                genero: "Romance",
+                preco: 49.90,
+                imagem: "/imagens/a-hipotese-do-amor.jpg"
+            },
+
+            {
+                id: "nocticadia",
+                titulo: "Nocticadia",
+                autor: "Keri Lake",
+                genero: "Fantasia",
+                preco: 64.90,
+                imagem: "/imagens/nocticadia.jpg"
+            },
+
+            {
+                id: "dias-perfeitos",
+                titulo: "Dias Perfeitos",
+                autor: "Raphael Montes",
+                genero: "Suspense",
+                preco: 42.90,
+                imagem: "/imagens/dias-perfeitos.jpg"
+            },
+
+            {
+                id: "verity",
+                titulo: "Verity",
+                autor: "Colleen Hoover",
+                genero: "Suspense",
+                preco: 47.90,
+                imagem: "/imagens/verity.jpg"
+            },
+
+            {
+                id: "assistente-do-vilao",
+                titulo: "Assistente do Vilão",
+                autor: "Hannah Nicole Maehrer",
+                genero: "Fantasia",
+                preco: 49.90,
+                imagem: "/imagens/assistente-do-vilao.jpg"
+            },
+
+            {
+                id: "a-paciente-silenciosa",
+                titulo: "A Paciente Silenciosa",
+                autor: "Alex Michaelides",
+                genero: "Suspense",
+                preco: 46.90,
+                imagem: "/imagens/a-paciente-silenciosa.jpg"
+            },
+
+            {
+                id: "nunca-minta",
+                titulo: "Nunca Minta",
+                autor: "Freida McFadden",
+                genero: "Suspense",
+                preco: 44.90,
+                imagem: "/imagens/nunca-minta.jpg"
+            },
 
-      <a
-        href="/login.html"
-        class="user-icon"
-        title="Minha conta"
-      >
-        👤
-      </a>
+            {
+                id: "limonare",
+                titulo: "Limonare",
+                autor: "Cecília Lessa",
+                genero: "Romance",
+                preco: 39.90,
+                imagem: "/imagens/limonare.jpg"
+            },
 
-    </div>
-
-
-    <nav class="menu">
-
-      <a href="/">
-        Início
-      </a>
-
-      <a href="/#livros">
-        Livros
-      </a>
+            {
+                id: "coroa-da-meia-noite",
+                titulo: "Coroa da Meia-Noite",
+                autor: "Sarah J. Maas",
+                genero: "Fantasia",
+                preco: 59.90,
+                imagem: "/imagens/coroa-da-meia-noite.jpg"
+            },
 
-      <a href="/cesta.html">
-        Cesta
-      </a>
+            {
+                id: "herdeira-do-fogo",
+                titulo: "Herdeira do Fogo",
+                autor: "Sarah J. Maas",
+                genero: "Fantasia",
+                preco: 64.90,
+                imagem: "/imagens/herdeira-do-fogo.jpg"
+            }
 
-      <a href="/login.html">
-        Minha conta
-      </a>
+        ];
 
-    </nav>
 
-  </header>
+        const parametros =
+            new URLSearchParams(
+                window.location.search
+            );
 
 
-  <main class="container">
+        const busca =
+            parametros.get("q") || "";
 
-    <div class="search-title">
 
-      <h1>
-        Resultado da busca
-      </h1>
+        const campoBusca =
+            document.getElementById(
+                "campo-busca"
+            );
 
-      <p id="texto-busca">
-        Livros encontrados
-      </p>
 
-    </div>
+        campoBusca.value = busca;
 
 
-    <section
-      class="products-grid"
-      id="resultado-busca"
-    >
-    </section>
+        const termo =
+            busca
+                .toLowerCase()
+                .trim();
 
-  </main>
 
+        const resultados =
+            livros.filter(livro => {
 
-  <script>
+                return (
+                    livro.titulo
+                        .toLowerCase()
+                        .includes(termo)
 
-    const livros = [
+                    ||
 
-      {
-        id: "trono-de-vidro",
-        titulo: "Trono de Vidro",
-        autor: "Sarah J. Maas",
-        genero: "Fantasia",
-        preco: 59.90,
-        imagem: "/imagens/trono-de-vidro.jpg"
-      },
+                    livro.autor
+                        .toLowerCase()
+                        .includes(termo)
 
-      {
-        id: "tudo-e-rio",
-        titulo: "Tudo é Rio",
-        autor: "Carla Madeira",
-        genero: "Romance",
-        preco: 44.90,
-        imagem: "/imagens/tudo-e-rio.jpg"
-      },
+                    ||
 
-      {
-        id: "a-hipotese-do-amor",
-        titulo: "A Hipótese do Amor",
-        autor: "Ali Hazelwood",
-        genero: "Romance",
-        preco: 49.90,
-        imagem: "/imagens/a-hipotese-do-amor.jpg"
-      },
+                    livro.genero
+                        .toLowerCase()
+                        .includes(termo)
+                );
 
-      {
-        id: "nocticadia",
-        titulo: "Nocticadia",
-        autor: "Keri Lake",
-        genero: "Fantasia",
-        preco: 64.90,
-        imagem: "/imagens/nocticadia.jpg"
-      },
+            });
 
-      {
-        id: "dias-perfeitos",
-        titulo: "Dias Perfeitos",
-        autor: "Raphael Montes",
-        genero: "Suspense",
-        preco: 42.90,
-        imagem: "/imagens/dias-perfeitos.jpg"
-      },
 
-      {
-        id: "verity",
-        titulo: "Verity",
-        autor: "Colleen Hoover",
-        genero: "Suspense",
-        preco: 47.90,
-        imagem: "/imagens/verity.jpg"
-      }
+        const container =
+            document.getElementById(
+                "resultado-busca"
+            );
 
-    ];
 
+        const textoBusca =
+            document.getElementById(
+                "texto-busca"
+            );
 
-    const parametros =
-      new URLSearchParams(
-        window.location.search
-      );
 
+        if (busca) {
 
-    const busca =
-      parametros.get("q") || "";
+            textoBusca.textContent =
+                resultados.length +
+                " resultado(s) para \"" +
+                busca +
+                "\"";
 
+        } else {
 
-    const campoBusca =
-      document.getElementById(
-        "campo-busca"
-      );
+            textoBusca.textContent =
+                "Todos os livros disponíveis";
 
+        }
 
-    campoBusca.value = busca;
 
+        if (resultados.length === 0) {
 
-    const termo =
-      busca
-        .toLowerCase()
-        .trim();
-
-
-    const resultados =
-      livros.filter(livro => {
-
-        return (
-          livro.titulo
-            .toLowerCase()
-            .includes(termo)
-
-          ||
-
-          livro.autor
-            .toLowerCase()
-            .includes(termo)
-
-          ||
-
-          livro.genero
-            .toLowerCase()
-            .includes(termo)
-        );
-
-      });
-
-
-    const container =
-      document.getElementById(
-        "resultado-busca"
-      );
-
-
-    const textoBusca =
-      document.getElementById(
-        "texto-busca"
-      );
-
-
-    if (busca) {
-
-      textoBusca.textContent =
-        resultados.length +
-        " resultado(s) para \"" +
-        busca +
-        "\"";
-
-    } else {
-
-      textoBusca.textContent =
-        "Todos os livros disponíveis";
-
-    }
-
-
-    if (resultados.length === 0) {
-
-      container.innerHTML = `
+            container.innerHTML = `
         <div class="empty-search">
 
           <h2>
@@ -263,22 +304,22 @@
         </div>
       `;
 
-    }
+        }
 
 
-    resultados.forEach(livro => {
+        resultados.forEach(livro => {
 
-      const precoFormatado =
-        livro.preco.toLocaleString(
-          "pt-BR",
-          {
-            style: "currency",
-            currency: "BRL"
-          }
-        );
+            const precoFormatado =
+                livro.preco.toLocaleString(
+                    "pt-BR",
+                    {
+                        style: "currency",
+                        currency: "BRL"
+                    }
+                );
 
 
-      container.innerHTML += `
+            container.innerHTML += `
 
         <article class="product-card">
 
@@ -335,9 +376,9 @@
 
       `;
 
-    });
+        });
 
-  </script>
+    </script>
 
 </body>
 

@@ -8,364 +8,377 @@
   <title>Cesta | Capítulo Livraria</title>
 
   <link rel="icon" type="image/png" href="/favicon.png">
-  
+
   <link rel="stylesheet" href="/loja.css">
 </head>
 
 <body>
 
-<header class="header">
+  <header class="header">
 
-  <div class="header-top">
+    <div class="header-top">
 
-    <a href="/" class="logo">
+      <a href="/" class="logo">
 
-      <span class="logo-mark">
-        C
-      </span>
+        <span class="logo-mark">
+          C
+        </span>
 
-      <div>
-        <strong>CAPÍTULO</strong>
-        <small>Livraria</small>
-      </div>
+        <div>
+          <strong>CAPÍTULO</strong>
+          <small>Livraria</small>
+        </div>
 
-    </a>
-
-
-    <form
-      class="search-box"
-      action="/busca.html"
-    >
-
-      <input
-        type="text"
-        name="q"
-        placeholder="Busque por título, autor ou gênero..."
-      >
-
-      <button type="submit">
-        🔍
-      </button>
-
-    </form>
+      </a>
 
 
-    <a
-      href="/login.html"
-      class="user-icon"
-    >
-      👤
-    </a>
+      <form class="search-box" action="/busca.html">
 
-  </div>
+        <input type="text" name="q" placeholder="Busque por título, autor ou gênero...">
 
-
-  <nav class="menu">
-
-    <a href="/">
-      Início
-    </a>
-
-    <a href="/#livros">
-      Livros
-    </a>
-
-    <a href="/cesta.html">
-      Cesta
-    </a>
-
-    <a href="/login.html">
-      Minha conta
-    </a>
-
-  </nav>
-
-</header>
-
-
-<main class="container">
-
-  <section
-    class="cart-box"
-    id="carrinho"
-  >
-
-    <h1>Minha cesta</h1>
-
-
-    <div class="cart-header">
-
-      <span>Livro</span>
-      <span>Quantidade</span>
-      <span>Valor</span>
-
-    </div>
-
-
-    <div id="itens-carrinho"></div>
-
-
-    <div class="cart-footer">
-
-      <div
-        class="total"
-        id="total-carrinho"
-      >
-        Total: R$ 0,00
-      </div>
-
-
-      <div class="actions">
-
-        <button
-          class="button button-secondary"
-          onclick="limparCesta()"
-        >
-          Limpar cesta
+        <button type="submit">
+          🔍
         </button>
 
-        <button
-          class="button button-primary"
-          onclick="finalizarCompra()"
-        >
-          Finalizar compra
-        </button>
+      </form>
+
+
+      <a href="/login.html" class="user-icon">
+        👤
+      </a>
+
+    </div>
+
+
+    <nav class="menu">
+
+      <a href="/">
+        Início
+      </a>
+
+      <a href="/#livros">
+        Livros
+      </a>
+
+      <a href="/cesta.html">
+        Cesta
+      </a>
+
+      <a href="/login.html">
+        Minha conta
+      </a>
+
+    </nav>
+
+  </header>
+
+
+  <main class="container">
+
+    <section class="cart-box" id="carrinho">
+
+      <h1>Minha cesta</h1>
+
+
+      <div class="cart-header">
+
+        <span>Livro</span>
+        <span>Quantidade</span>
+        <span>Valor</span>
 
       </div>
 
-    </div>
 
-  </section>
-
-
-  <section
-    class="thank-you"
-    id="agradecimento"
-    style="display: none;"
-  >
-
-    <div class="thank-you-icon">
-      ✓
-    </div>
-
-    <h1>
-      Obrigado pela sua compra!
-    </h1>
-
-    <p>
-      Seu pedido foi realizado com sucesso.
-      Esperamos que você aproveite suas próximas leituras.
-    </p>
-
-    <a
-      href="/"
-      class="button"
-    >
-      Continuar comprando
-    </a>
-
-  </section>
-
-</main>
+      <div id="itens-carrinho"></div>
 
 
-<script>
+      <div class="cart-footer">
 
-  const livros = {
-
-    "trono-de-vidro": {
-      titulo: "Trono de Vidro",
-      autor: "Sarah J. Maas",
-      preco: 59.90,
-      imagem: "/imagens/trono-de-vidro.jpg"
-    },
-
-    "tudo-e-rio": {
-      titulo: "Tudo é Rio",
-      autor: "Carla Madeira",
-      preco: 44.90,
-      imagem: "/imagens/tudo-e-rio.jpg"
-    },
-
-    "a-hipotese-do-amor": {
-      titulo: "A Hipótese do Amor",
-      autor: "Ali Hazelwood",
-      preco: 49.90,
-      imagem: "/imagens/a-hipotese-do-amor.jpg"
-    },
-
-    "nocticadia": {
-      titulo: "Nocticadia",
-      autor: "Keri Lake",
-      preco: 64.90,
-      imagem: "/imagens/nocticadia.jpg"
-    },
-
-    "dias-perfeitos": {
-      titulo: "Dias Perfeitos",
-      autor: "Raphael Montes",
-      preco: 42.90,
-      imagem: "/imagens/dias-perfeitos.jpg"
-    },
-
-    "verity": {
-      titulo: "Verity",
-      autor: "Colleen Hoover",
-      preco: 47.90,
-      imagem: "/imagens/verity.jpg"
-    }
-
-  };
+        <div class="total" id="total-carrinho">
+          Total: R$ 0,00
+        </div>
 
 
-  function carregarCarrinho() {
+        <div class="actions">
 
-    return JSON.parse(
-      localStorage.getItem("carrinho")
-    ) || [];
+          <button class="button button-secondary" onclick="limparCesta()">
+            Limpar cesta
+          </button>
 
-  }
+          <button class="button button-primary" onclick="finalizarCompra()">
+            Finalizar compra
+          </button>
 
+        </div>
 
-  function salvarCarrinho(carrinho) {
+      </div>
 
-    localStorage.setItem(
-      "carrinho",
-      JSON.stringify(carrinho)
-    );
-
-  }
+    </section>
 
 
-  function adicionarLivro(id) {
+    <section class="thank-you" id="agradecimento" style="display: none;">
 
-    const livro = livros[id];
+      <div class="thank-you-icon">
+        ✓
+      </div>
 
-    if (!livro) {
-      return;
-    }
+      <h1>
+        Obrigado pela sua compra!
+      </h1>
 
+      <p>
+        Seu pedido foi realizado com sucesso.
+        Esperamos que você aproveite suas próximas leituras.
+      </p>
 
-    const carrinho = carregarCarrinho();
+      <a href="/" class="button">
+        Continuar comprando
+      </a>
 
+    </section>
 
-    const itemExistente = carrinho.find(
-      item => item.id === id
-    );
-
-
-    if (itemExistente) {
-
-      itemExistente.quantidade++;
-
-    } else {
-
-      carrinho.push({
-        id: id,
-        quantidade: 1
-      });
-
-    }
+  </main>
 
 
-    salvarCarrinho(carrinho);
+  <script>
 
-  }
+    const livros = {
+
+      "trono-de-vidro": {
+        titulo: "Trono de Vidro",
+        autor: "Sarah J. Maas",
+        preco: 59.90,
+        imagem: "/imagens/trono-de-vidro.jpg"
+      },
+
+      "tudo-e-rio": {
+        titulo: "Tudo é Rio",
+        autor: "Carla Madeira",
+        preco: 44.90,
+        imagem: "/imagens/tudo-e-rio.jpg"
+      },
+
+      "a-hipotese-do-amor": {
+        titulo: "A Hipótese do Amor",
+        autor: "Ali Hazelwood",
+        preco: 49.90,
+        imagem: "/imagens/a-hipotese-do-amor.jpg"
+      },
+
+      "nocticadia": {
+        titulo: "Nocticadia",
+        autor: "Keri Lake",
+        preco: 64.90,
+        imagem: "/imagens/nocticadia.jpg"
+      },
+
+      "dias-perfeitos": {
+        titulo: "Dias Perfeitos",
+        autor: "Raphael Montes",
+        preco: 42.90,
+        imagem: "/imagens/dias-perfeitos.jpg"
+      },
+
+      "verity": {
+        titulo: "Verity",
+        autor: "Colleen Hoover",
+        preco: 47.90,
+        imagem: "/imagens/verity.jpg"
+      },
+
+      "assistente-do-vilao": {
+        titulo: "Assistente do Vilão",
+        autor: "Hannah Nicole Maehrer",
+        preco: 49.90,
+        imagem: "/imagens/assistente-do-vilao.jpg"
+      },
+
+      "a-paciente-silenciosa": {
+        titulo: "A Paciente Silenciosa",
+        autor: "Alex Michaelides",
+        preco: 46.90,
+        imagem: "/imagens/a-paciente-silenciosa.jpg"
+      },
+
+      "nunca-minta": {
+        titulo: "Nunca Minta",
+        autor: "Freida McFadden",
+        preco: 44.90,
+        imagem: "/imagens/nunca-minta.jpg"
+      },
+
+      "limonare": {
+        titulo: "Limonare",
+        autor: "Cecília Lessa",
+        preco: 39.90,
+        imagem: "/imagens/limonare.jpg"
+      },
+
+      "coroa-da-meia-noite": {
+        titulo: "Coroa da Meia-Noite",
+        autor: "Sarah J. Maas",
+        preco: 59.90,
+        imagem: "/imagens/coroa-da-meia-noite.jpg"
+      },
+
+      "herdeira-do-fogo": {
+        titulo: "Herdeira do Fogo",
+        autor: "Sarah J. Maas",
+        preco: 64.90,
+        imagem: "/imagens/herdeira-do-fogo.jpg"
+      }
+
+    };
 
 
-  function atualizarQuantidade(
-    id,
-    quantidade
-  ) {
+    function carregarCarrinho() {
 
-    const carrinho = carregarCarrinho();
-
-
-    const item = carrinho.find(
-      item => item.id === id
-    );
-
-
-    if (!item) {
-      return;
-    }
-
-
-    quantidade = Number(quantidade);
-
-
-    if (quantidade <= 0) {
-
-      removerItem(id);
-
-      return;
+      return JSON.parse(
+        localStorage.getItem("carrinho")
+      ) || [];
 
     }
 
 
-    item.quantidade = quantidade;
+    function salvarCarrinho(carrinho) {
+
+      localStorage.setItem(
+        "carrinho",
+        JSON.stringify(carrinho)
+      );
+
+    }
 
 
-    salvarCarrinho(carrinho);
+    function adicionarLivro(id) {
 
-    renderizarCarrinho();
+      const livro = livros[id];
 
-  }
-
-
-  function removerItem(id) {
-
-    let carrinho = carregarCarrinho();
+      if (!livro) {
+        return;
+      }
 
 
-    carrinho = carrinho.filter(
-      item => item.id !== id
-    );
+      const carrinho = carregarCarrinho();
 
 
-    salvarCarrinho(carrinho);
-
-    renderizarCarrinho();
-
-  }
-
-
-  function limparCesta() {
-
-    localStorage.removeItem("carrinho");
-
-    renderizarCarrinho();
-
-  }
-
-
-  function renderizarCarrinho() {
-
-    const carrinho =
-      carregarCarrinho();
-
-
-    const container =
-      document.getElementById(
-        "itens-carrinho"
+      const itemExistente = carrinho.find(
+        item => item.id === id
       );
 
 
-    const totalElemento =
-      document.getElementById(
-        "total-carrinho"
+      if (itemExistente) {
+
+        itemExistente.quantidade++;
+
+      } else {
+
+        carrinho.push({
+          id: id,
+          quantidade: 1
+        });
+
+      }
+
+
+      salvarCarrinho(carrinho);
+
+    }
+
+
+    function atualizarQuantidade(
+      id,
+      quantidade
+    ) {
+
+      const carrinho = carregarCarrinho();
+
+
+      const item = carrinho.find(
+        item => item.id === id
       );
 
 
-    container.innerHTML = "";
+      if (!item) {
+        return;
+      }
 
 
-    let total = 0;
+      quantidade = Number(quantidade);
 
 
-    if (carrinho.length === 0) {
+      if (quantidade <= 0) {
 
-      container.innerHTML = `
+        removerItem(id);
+
+        return;
+
+      }
+
+
+      item.quantidade = quantidade;
+
+
+      salvarCarrinho(carrinho);
+
+      renderizarCarrinho();
+
+    }
+
+
+    function removerItem(id) {
+
+      let carrinho = carregarCarrinho();
+
+
+      carrinho = carrinho.filter(
+        item => item.id !== id
+      );
+
+
+      salvarCarrinho(carrinho);
+
+      renderizarCarrinho();
+
+    }
+
+
+    function limparCesta() {
+
+      localStorage.removeItem("carrinho");
+
+      renderizarCarrinho();
+
+    }
+
+
+    function renderizarCarrinho() {
+
+      const carrinho =
+        carregarCarrinho();
+
+
+      const container =
+        document.getElementById(
+          "itens-carrinho"
+        );
+
+
+      const totalElemento =
+        document.getElementById(
+          "total-carrinho"
+        );
+
+
+      container.innerHTML = "";
+
+
+      let total = 0;
+
+
+      if (carrinho.length === 0) {
+
+        container.innerHTML = `
         <div class="empty-cart">
           <p>
             Sua cesta está vazia.
@@ -380,29 +393,29 @@
         </div>
       `;
 
-    }
-
-
-    carrinho.forEach(item => {
-
-      const livro =
-        livros[item.id];
-
-
-      if (!livro) {
-        return;
       }
 
 
-      const subtotal =
-        livro.preco *
-        item.quantidade;
+      carrinho.forEach(item => {
+
+        const livro =
+          livros[item.id];
 
 
-      total += subtotal;
+        if (!livro) {
+          return;
+        }
 
 
-      container.innerHTML += `
+        const subtotal =
+          livro.preco *
+          item.quantidade;
+
+
+        total += subtotal;
+
+
+        container.innerHTML += `
         <div class="cart-item">
 
           <div class="product-info">
@@ -454,97 +467,97 @@
           <div class="price">
 
             ${subtotal.toLocaleString(
-              "pt-BR",
-              {
-                style: "currency",
-                currency: "BRL"
-              }
-            )}
+          "pt-BR",
+          {
+            style: "currency",
+            currency: "BRL"
+          }
+        )}
 
           </div>
 
         </div>
       `;
 
-    });
+      });
 
 
-    totalElemento.textContent =
-      "Total: " +
-      total.toLocaleString(
-        "pt-BR",
-        {
-          style: "currency",
-          currency: "BRL"
-        }
-      );
-
-  }
-
-
-  function finalizarCompra() {
-
-    const carrinho =
-      carregarCarrinho();
-
-
-    if (carrinho.length === 0) {
-
-      alert(
-        "Sua cesta está vazia."
-      );
-
-      return;
+      totalElemento.textContent =
+        "Total: " +
+        total.toLocaleString(
+          "pt-BR",
+          {
+            style: "currency",
+            currency: "BRL"
+          }
+        );
 
     }
 
 
-    localStorage.removeItem(
-      "carrinho"
-    );
+    function finalizarCompra() {
+
+      const carrinho =
+        carregarCarrinho();
 
 
-    document.getElementById(
-      "carrinho"
-    ).style.display = "none";
+      if (carrinho.length === 0) {
+
+        alert(
+          "Sua cesta está vazia."
+        );
+
+        return;
+
+      }
 
 
-    document.getElementById(
-      "agradecimento"
-    ).style.display = "block";
-
-  }
+      localStorage.removeItem(
+        "carrinho"
+      );
 
 
-  const parametros =
-    new URLSearchParams(
-      window.location.search
-    );
+      document.getElementById(
+        "carrinho"
+      ).style.display = "none";
 
 
-  const livroAdicionar =
-    parametros.get("add");
+      document.getElementById(
+        "agradecimento"
+      ).style.display = "block";
+
+    }
 
 
-  if (livroAdicionar) {
-
-    adicionarLivro(
-      livroAdicionar
-    );
-
-
-    history.replaceState(
-      {},
-      "",
-      "/cesta.html"
-    );
-
-  }
+    const parametros =
+      new URLSearchParams(
+        window.location.search
+      );
 
 
-  renderizarCarrinho();
+    const livroAdicionar =
+      parametros.get("add");
 
-</script>
+
+    if (livroAdicionar) {
+
+      adicionarLivro(
+        livroAdicionar
+      );
+
+
+      history.replaceState(
+        {},
+        "",
+        "/cesta.html"
+      );
+
+    }
+
+
+    renderizarCarrinho();
+
+  </script>
 
 </body>
 
