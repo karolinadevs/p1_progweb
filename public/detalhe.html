@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Detalhe do Livro | Capítulo Livraria</title>
+
+  <link rel="stylesheet" href="/loja.css">
+</head>
+
+<body>
+
+  <header class="header">
+
+    <div class="header-top">
+
+      <a href="/" class="logo">
+        <span class="logo-mark">C</span>
+
+        <div>
+          <strong>CAPÍTULO</strong>
+          <small>Livraria</small>
+        </div>
+      </a>
+
+      <form class="search-box" action="/busca.html">
+        <input type="text" name="q" placeholder="Busque por título, autor ou gênero...">
+
+        <button type="submit">
+          🔍
+        </button>
+      </form>
+
+      <a href="/login.html" class="user-icon">
+        👤
+      </a>
+
+    </div>
+
+
+    <nav class="menu">
+      <a href="/">Início</a>
+      <a href="/#livros">Livros</a>
+      <a href="/cesta.html">Cesta</a>
+      <a href="/login.html">Minha conta</a>
+    </nav>
+
+  </header>
+
+
+  <main class="container">
+
+    <section class="product-detail">
+
+      <div class="product-image">
+
+        <img id="livro-imagem" src="" alt="">
+
+      </div>
+
+
+      <div class="product-info">
+
+        <span id="livro-categoria" class="eyebrow"></span>
+
+        <h1 id="livro-titulo"></h1>
+
+        <p>
+          <strong id="livro-autor"></strong>
+        </p>
+
+        <p id="livro-descricao"></p>
+
+        <p id="livro-detalhes"></p>
+
+        <strong id="livro-preco" class="price"></strong>
+
+        <a id="comprar-livro" href="/cesta.html" class="buy-button">
+          Comprar
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <script>
+    const livros = {
+      "trono-de-vidro": {
+        titulo: "Trono de Vidro",
+        autor: "Sarah J. Maas",
+        categoria: "Fantasia",
+        preco: "R$ 59,90",
+        imagem: "/imagens/trono-de-vidro.jpg",
+        descricao:
+          "Celaena Sardothien é uma assassina treinada que recebe a chance de conquistar sua liberdade ao participar de uma competição no reino de Adarlan.",
+        detalhes:
+          "Autora: Sarah J. Maas | Gênero: Fantasia | Formato: Livro físico"
+      },
+
+      "tudo-e-rio": {
+        titulo: "Tudo é Rio",
+        autor: "Carla Madeira",
+        categoria: "Romance",
+        preco: "R$ 44,90",
+        imagem: "/imagens/tudo-e-rio.jpg",
+        descricao:
+          "Um romance intenso sobre amor, dor, desejo, culpa e perdão, marcado por relações humanas profundas e complexas.",
+        detalhes:
+          "Autora: Carla Madeira | Gênero: Romance | Formato: Livro físico"
+      },
+
+      "a-hipotese-do-amor": {
+        titulo: "A Hipótese do Amor",
+        autor: "Ali Hazelwood",
+        categoria: "Romance",
+        preco: "R$ 49,90",
+        imagem: "/imagens/a-hipotese-do-amor.jpg",
+        descricao:
+          "Olive Smith é uma estudante de doutorado que acaba entrando em um relacionamento de mentira com um professor bastante conhecido.",
+        detalhes:
+          "Autora: Ali Hazelwood | Gênero: Romance | Formato: Livro físico"
+      },
+
+      "nocticadia": {
+        titulo: "Nocticadia",
+        autor: "Keri Lake",
+        categoria: "Fantasia",
+        preco: "R$ 64,90",
+        imagem: "/imagens/nocticadia.jpg",
+        descricao:
+          "Uma história sombria e atmosférica que mistura romance, mistério e elementos góticos em uma narrativa envolvente.",
+        detalhes:
+          "Autora: Keri Lake | Gênero: Fantasia | Formato: Livro físico"
+      },
+
+      "dias-perfeitos": {
+        titulo: "Dias Perfeitos",
+        autor: "Raphael Montes",
+        categoria: "Suspense",
+        preco: "R$ 42,90",
+        imagem: "/imagens/dias-perfeitos.jpg",
+        descricao:
+          "Um suspense psicológico inquietante sobre obsessão, controle e uma relação que toma caminhos cada vez mais perturbadores.",
+        detalhes:
+          "Autor: Raphael Montes | Gênero: Suspense | Formato: Livro físico"
+      },
+
+      "verity": {
+        titulo: "Verity",
+        autor: "Colleen Hoover",
+        categoria: "Suspense",
+        preco: "R$ 47,90",
+        imagem: "/imagens/verity.jpg",
+        descricao:
+          "Lowen Ashleigh é contratada para concluir uma série de livros e acaba encontrando um manuscrito perturbador da autora Verity Crawford.",
+        detalhes:
+          "Autora: Colleen Hoover | Gênero: Suspense | Formato: Livro físico"
+      }
+    };
+
+    const parametros = new URLSearchParams(window.location.search);
+
+    const livroSelecionado = parametros.get("livro");
+
+    const livro = livros[livroSelecionado];
+
+    if (livro) {
+      document.getElementById("livro-titulo").textContent =
+        livro.titulo;
+
+      document.getElementById("livro-autor").textContent =
+        livro.autor;
+
+      document.getElementById("livro-categoria").textContent =
+        livro.categoria;
+
+      document.getElementById("livro-preco").textContent =
+        livro.preco;
+
+      document.getElementById("livro-descricao").textContent =
+        livro.descricao;
+
+      document.getElementById("livro-detalhes").textContent =
+        livro.detalhes;
+
+      const imagem =
+        document.getElementById("livro-imagem");
+
+      imagem.src = livro.imagem;
+      imagem.alt = "Capa do livro " + livro.titulo;
+
+      document.getElementById(
+        "comprar-livro"
+      ).href =
+        "/cesta.html?add=" +
+        livroSelecionado;
+
+      document.title =
+        livro.titulo + " | Capítulo Livraria";
+    } else {
+      document.getElementById("livro-titulo").textContent =
+        "Livro não encontrado";
+
+      document.getElementById("livro-descricao").textContent =
+        "Não foi possível encontrar as informações deste livro.";
+
+      document.getElementById("livro-imagem").style.display =
+        "none";
+
+      document.getElementById("livro-categoria").style.display =
+        "none";
+
+      document.getElementById("livro-autor").style.display =
+        "none";
+
+      document.getElementById("livro-preco").style.display =
+        "none";
+
+      document.getElementById("livro-detalhes").style.display =
+        "none";
+    }
+  </script>
+
+</body>
+
+</html>

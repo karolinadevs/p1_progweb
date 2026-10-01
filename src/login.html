@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Minha conta | Capítulo Livraria</title>
+
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="/loja.css">
+</head>
+
+<body>
+
+  <header class="header">
+
+    <div class="header-top">
+
+      <a href="/" class="logo">
+        <span class="logo-mark">C</span>
+
+        <div>
+          <strong>CAPÍTULO</strong>
+          <small>Livraria</small>
+        </div>
+      </a>
+
+
+      <form
+        class="search-box"
+        action="/busca.html"
+      >
+        <input
+          type="text"
+          name="q"
+          placeholder="Busque por título, autor ou gênero..."
+        >
+
+        <button type="submit">
+          🔍
+        </button>
+      </form>
+
+
+      <a
+        href="/login.html"
+        class="user-icon"
+        title="Minha conta"
+      >
+        👤
+      </a>
+
+    </div>
+
+
+    <nav class="menu">
+
+      <a href="/">
+        Início
+      </a>
+
+      <a href="/#livros">
+        Livros
+      </a>
+
+      <a href="/cesta.html">
+        Cesta
+      </a>
+
+      <a href="/login.html">
+        Minha conta
+      </a>
+
+    </nav>
+
+  </header>
+
+
+  <main class="container">
+
+    <section
+      class="login-box"
+      id="area-login"
+    >
+
+      <div class="login-area">
+
+        <h1>
+          Já tenho cadastro
+        </h1>
+
+
+        <form id="login-form">
+
+          <div class="form-group">
+
+            <label for="email">
+              E-mail
+            </label>
+
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Digite seu e-mail"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="senha">
+              Senha
+            </label>
+
+            <input
+              type="password"
+              id="senha"
+              name="senha"
+              placeholder="Digite sua senha"
+              minlength="6"
+              required
+            >
+
+          </div>
+
+
+          <button
+            type="submit"
+            class="button"
+          >
+            Entrar
+          </button>
+
+        </form>
+
+
+        <a
+          href="/esqueci-senha.html"
+          class="forgot-password"
+        >
+          Esqueci minha senha
+        </a>
+
+      </div>
+
+
+      <div class="register-area">
+
+        <h2>
+          Ainda não tenho cadastro
+        </h2>
+
+        <p>
+          Crie sua conta para continuar suas compras,
+          acompanhar seus pedidos e acessar seus dados.
+        </p>
+
+        <a
+          href="/cadastro.html"
+          class="button"
+        >
+          Criar conta
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <section
+      class="form-card"
+      id="area-logada"
+      style="display: none;"
+    >
+
+      <h1>
+        Minha conta
+      </h1>
+
+      <p>
+        Olá,
+        <strong id="nome-usuario"></strong>!
+      </p>
+
+      <p>
+        Você está conectado à sua conta da
+        Capítulo Livraria.
+      </p>
+
+      <button
+        class="button button-secondary"
+        onclick="sair()"
+      >
+        Sair da conta
+      </button>
+
+    </section>
+
+  </main>
+
+
+  <script>
+
+    const form =
+      document.getElementById(
+        "login-form"
+      );
+
+
+    function verificarLogin() {
+
+      const usuarioLogado =
+        JSON.parse(
+          localStorage.getItem(
+            "usuarioLogado"
+          )
+        );
+
+
+      if (usuarioLogado) {
+
+        document.getElementById(
+          "area-login"
+        ).style.display =
+          "none";
+
+
+        document.getElementById(
+          "area-logada"
+        ).style.display =
+          "block";
+
+
+        document.getElementById(
+          "nome-usuario"
+        ).textContent =
+          usuarioLogado.nome;
+
+      }
+
+    }
+
+
+    form.addEventListener(
+      "submit",
+      function(event) {
+
+        event.preventDefault();
+
+
+        const email =
+          document
+            .getElementById("email")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+        const senha =
+          document
+            .getElementById("senha")
+            .value;
+
+
+        const usuarios =
+          JSON.parse(
+            localStorage.getItem(
+              "usuarios"
+            )
+          ) || [];
+
+
+        const usuario =
+          usuarios.find(
+            usuario =>
+              usuario.email === email &&
+              usuario.senha === senha
+          );
+
+
+        if (!usuario) {
+
+          alert(
+            "E-mail ou senha incorretos."
+          );
+
+          return;
+
+        }
+
+
+        localStorage.setItem(
+          "usuarioLogado",
+          JSON.stringify(
+            usuario
+          )
+        );
+
+
+        alert(
+          "Bem-vindo, " +
+          usuario.nome +
+          "!"
+        );
+
+
+        verificarLogin();
+
+      }
+    );
+
+
+    function sair() {
+
+      localStorage.removeItem(
+        "usuarioLogado"
+      );
+
+
+      window.location.reload();
+
+    }
+
+
+    verificarLogin();
+
+  </script>
+
+</body>
+
+</html>

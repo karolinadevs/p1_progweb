@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Busca | Capítulo Livraria</title>
+
+  <link rel="stylesheet" href="/loja.css">
+</head>
+
+<body>
+
+  <header class="header">
+
+    <div class="header-top">
+
+      <a href="/" class="logo">
+        <span class="logo-mark">C</span>
+
+        <div>
+          <strong>CAPÍTULO</strong>
+          <small>Livraria</small>
+        </div>
+      </a>
+
+
+      <form
+        class="search-box"
+        action="/busca.html"
+      >
+        <input
+          type="text"
+          name="q"
+          id="campo-busca"
+          placeholder="Busque por título, autor ou gênero..."
+        >
+
+        <button type="submit">
+          🔍
+        </button>
+      </form>
+
+
+      <a
+        href="/login.html"
+        class="user-icon"
+        title="Minha conta"
+      >
+        👤
+      </a>
+
+    </div>
+
+
+    <nav class="menu">
+
+      <a href="/">
+        Início
+      </a>
+
+      <a href="/#livros">
+        Livros
+      </a>
+
+      <a href="/cesta.html">
+        Cesta
+      </a>
+
+      <a href="/login.html">
+        Minha conta
+      </a>
+
+    </nav>
+
+  </header>
+
+
+  <main class="container">
+
+    <div class="search-title">
+
+      <h1>
+        Resultado da busca
+      </h1>
+
+      <p id="texto-busca">
+        Livros encontrados
+      </p>
+
+    </div>
+
+
+    <section
+      class="products-grid"
+      id="resultado-busca"
+    >
+    </section>
+
+  </main>
+
+
+  <script>
+
+    const livros = [
+
+      {
+        id: "trono-de-vidro",
+        titulo: "Trono de Vidro",
+        autor: "Sarah J. Maas",
+        genero: "Fantasia",
+        preco: 59.90,
+        imagem: "/imagens/trono-de-vidro.jpg"
+      },
+
+      {
+        id: "tudo-e-rio",
+        titulo: "Tudo é Rio",
+        autor: "Carla Madeira",
+        genero: "Romance",
+        preco: 44.90,
+        imagem: "/imagens/tudo-e-rio.jpg"
+      },
+
+      {
+        id: "a-hipotese-do-amor",
+        titulo: "A Hipótese do Amor",
+        autor: "Ali Hazelwood",
+        genero: "Romance",
+        preco: 49.90,
+        imagem: "/imagens/a-hipotese-do-amor.jpg"
+      },
+
+      {
+        id: "nocticadia",
+        titulo: "Nocticadia",
+        autor: "Keri Lake",
+        genero: "Fantasia",
+        preco: 64.90,
+        imagem: "/imagens/nocticadia.jpg"
+      },
+
+      {
+        id: "dias-perfeitos",
+        titulo: "Dias Perfeitos",
+        autor: "Raphael Montes",
+        genero: "Suspense",
+        preco: 42.90,
+        imagem: "/imagens/dias-perfeitos.jpg"
+      },
+
+      {
+        id: "verity",
+        titulo: "Verity",
+        autor: "Colleen Hoover",
+        genero: "Suspense",
+        preco: 47.90,
+        imagem: "/imagens/verity.jpg"
+      }
+
+    ];
+
+
+    const parametros =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    const busca =
+      parametros.get("q") || "";
+
+
+    const campoBusca =
+      document.getElementById(
+        "campo-busca"
+      );
+
+
+    campoBusca.value = busca;
+
+
+    const termo =
+      busca
+        .toLowerCase()
+        .trim();
+
+
+    const resultados =
+      livros.filter(livro => {
+
+        return (
+          livro.titulo
+            .toLowerCase()
+            .includes(termo)
+
+          ||
+
+          livro.autor
+            .toLowerCase()
+            .includes(termo)
+
+          ||
+
+          livro.genero
+            .toLowerCase()
+            .includes(termo)
+        );
+
+      });
+
+
+    const container =
+      document.getElementById(
+        "resultado-busca"
+      );
+
+
+    const textoBusca =
+      document.getElementById(
+        "texto-busca"
+      );
+
+
+    if (busca) {
+
+      textoBusca.textContent =
+        resultados.length +
+        " resultado(s) para \"" +
+        busca +
+        "\"";
+
+    } else {
+
+      textoBusca.textContent =
+        "Todos os livros disponíveis";
+
+    }
+
+
+    if (resultados.length === 0) {
+
+      container.innerHTML = `
+        <div class="empty-search">
+
+          <h2>
+            Nenhum livro encontrado
+          </h2>
+
+          <p>
+            Tente pesquisar por outro título,
+            autor ou gênero.
+          </p>
+
+          <a
+            href="/"
+            class="button"
+          >
+            Voltar para a livraria
+          </a>
+
+        </div>
+      `;
+
+    }
+
+
+    resultados.forEach(livro => {
+
+      const precoFormatado =
+        livro.preco.toLocaleString(
+          "pt-BR",
+          {
+            style: "currency",
+            currency: "BRL"
+          }
+        );
+
+
+      container.innerHTML += `
+
+        <article class="product-card">
+
+          <a
+            href="/detalhe.html?livro=${livro.id}"
+            class="product-image"
+          >
+
+            <img
+              src="${livro.imagem}"
+              alt="Capa do livro ${livro.titulo}"
+            >
+
+          </a>
+
+
+          <div class="product-content">
+
+            <a
+              href="/detalhe.html?livro=${livro.id}"
+            >
+
+              <h2>
+                ${livro.titulo}
+              </h2>
+
+            </a>
+
+
+            <p class="author">
+              ${livro.autor}
+            </p>
+
+
+            <div class="product-footer">
+
+              <strong>
+                ${precoFormatado}
+              </strong>
+
+
+              <a
+                href="/cesta.html?add=${livro.id}"
+                class="button"
+              >
+                Comprar
+              </a>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      `;
+
+    });
+
+  </script>
+
+</body>
+
+</html>
